@@ -70,7 +70,7 @@ async function getFromKV(ctx): Promise<Response> {
   if (ctx.request.method == 'GET') {
 		try {
 			// const value = await ctx.env.ASSETS.list()
-      return new Response(JSON.stringify(ctx.env))
+      return new Response(JSON.stringify(ctx.env.ASSETS))
 		} catch (e) {
       
 			return new Response(JSON.stringify(e, Object.getOwnPropertyNames(e)), { status: 500 });
