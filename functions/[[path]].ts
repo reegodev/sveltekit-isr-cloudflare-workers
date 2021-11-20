@@ -69,17 +69,11 @@ async function getFromKV(ctx): Promise<Response> {
   const { request } = ctx
   if (ctx.request.method == 'GET') {
 		try {
-			return await getAssetFromKV({
-        request,
-        waitUntil(promise) {
-          return ctx.waitUntil(promise)
-        },
-      }, {
-				ASSET_NAMESPACE: ctx.env.ASSETS,
-			});
+			const value = await ctx.env.ASSETS.list()
+      return new Response(value.keys)
 		} catch (e) {
-      const value = await ctx.env.ASSETS.list()
-			return new Response(JSON.stringify(value.keys), { status: 500 });
+      
+			return new Response(JSON.stringify(e, Object.getOwnPropertyNames(e)), { status: 500 });
 		}
 	}
 
