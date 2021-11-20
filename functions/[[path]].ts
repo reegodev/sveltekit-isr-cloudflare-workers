@@ -74,9 +74,7 @@ async function getFromKV(ctx): Promise<Response> {
         waitUntil(promise) {
           return ctx.waitUntil(promise)
         },
-      }, {
-				ASSET_NAMESPACE: ctx.env.STATIC_ASSETS,
-			});
+      });
 		} catch (e) {
 			if (!(e instanceof NotFoundError)) {
 				return new Response('Error loading static asset:' + (e.message || e.toString()), {
