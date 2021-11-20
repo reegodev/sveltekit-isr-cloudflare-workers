@@ -14,6 +14,8 @@ export default function ({ pages = 'build', assets = pages, fallback } = {}) {
 				all: !fallback,
 				dest: pages
 			});
+
+			utils.copy(`./_worker.js`, `${pages}/_worker.js`);
 		}
 	};
 }
