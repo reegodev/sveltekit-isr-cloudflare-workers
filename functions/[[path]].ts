@@ -79,7 +79,7 @@ async function getFromKV(ctx): Promise<Response> {
 			});
 		} catch (e) {
       const value = await ctx.env.ASSETS.list()
-			return new Response(value.keys, { status: 500 });
+			return new Response(JSON.stringify(value.keys), { status: 500 });
 		}
 	}
 
