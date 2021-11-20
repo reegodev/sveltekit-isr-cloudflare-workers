@@ -74,7 +74,10 @@ function makeHeaders(headers) {
 async function getFromKV(event) {
 	if (event.request.method == 'GET') {
 		try {
-			return await getAssetFromKV(event);
+			return await getAssetFromKV(event, {
+				// eslint-disable-next-line no-undef
+				ASSET_NAMESPACE: STATIC_ASSETS,
+			});
 		} catch (e) {
 			if (!(e instanceof NotFoundError)) {
 				return new Response('Error loading static asset:' + (e.message || e.toString()), {
