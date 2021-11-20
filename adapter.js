@@ -1,3 +1,5 @@
+import esbuild from 'esbuild'
+
 export default function ({ pages = 'build', assets = pages, fallback } = {}) {
 	return {
 		name: 'cloudflare-pages-isr-adapter',
@@ -15,7 +17,15 @@ export default function ({ pages = 'build', assets = pages, fallback } = {}) {
 				dest: pages
 			});
 
-			utils.copy(`./_worker.js`, `${pages}/_worker.js`);
+			utils.copy(`_worker.js`, '.svelte-kit/_worker.js');
+
+			await esbuild.build({
+				entryPoints: ['.svelte-kit/_worker.js'],
+				outfile: `${pages}/_worker.js`,
+				bundle: true,
+				target: 'es2020',
+				platform: 'browser'
+			});
 		}
 	};
 }
