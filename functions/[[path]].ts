@@ -1,8 +1,6 @@
 import { init, render } from '../.svelte-kit/output/server/app.js';
 import { getAssetFromKV, NotFoundError } from '@cloudflare/kv-asset-handler';
 
-declare const STATIC_ASSETS: any;
-
 init();
 
 export async function onRequest(ctx: any): Promise<Response> {
@@ -77,7 +75,7 @@ async function getFromKV(ctx): Promise<Response> {
           return ctx.waitUntil(promise)
         },
       }, {
-				ASSET_NAMESPACE: STATIC_ASSETS,
+				ASSET_NAMESPACE: ctx.env.STATIC_ASSETS,
 			});
 		} catch (e) {
 			if (!(e instanceof NotFoundError)) {
