@@ -78,7 +78,8 @@ async function getFromKV(ctx): Promise<Response> {
 				ASSET_NAMESPACE: ctx.env.ASSETS,
 			});
 		} catch (e) {
-			return new Response(JSON.stringify(e, Object.getOwnPropertyNames(e)), { status: 500 });
+      const value = await ctx.env.ASSETS.list()
+			return new Response(value.keys, { status: 500 });
 		}
 	}
 
