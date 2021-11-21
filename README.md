@@ -8,11 +8,11 @@ The red bar on the top of every page shows rendering information. If you refresh
 
 ## What is ISR?
 
-The term was coined by Vercel, and it's a method of rendering static pages on demand instead of generating all pages at build time like a normal SSG does. After the page is rendered, it is persisted along with the rest of the site assets so that subsequent requests effectively hit a static page.
-This allows websites with thousands of pages to keep build times low.<br>
-NextJS has built-in support for ISR when deployed on Vercel, although their implementation feels like black magic since deployment artifacts are read only and you can't write new files.
+ncremental Static Regeneration, or ISR for short, is a technique first introduced by Vercel to improve build times for large static websites with a lot of pages.
 
-You can read more about ISR on [Vercel official documentation](https://vercel.com/docs/concepts/next.js/incremental-static-regeneration)
+Instead of rendering every page upfront at build time, you render pages on demand when they are requested, and then persist the response along with the rest of the site assets, effectively serving static pages after the first render.
+
+This is a really cool feature that allows Jamstack sites to scale indefinitely.
 
 ## How do you achieve ISR on Cloudflare Workers?
 
