@@ -17,7 +17,7 @@ This is a really cool feature that allows Jamstack sites to scale indefinitely.
 ## How do you achieve ISR on Cloudflare Workers?
 
 - **TL:DR version**: Use KV to store pages after you render them. You can even supply a TTL to expire pages after a certain amount of time.
-- **Detailed, framrwork-agnostic explanation**: please read my [blog post](https://reego.dev/blog/isr-on-cloudflare-workers).
+- **Detailed, framework-agnostic explanation**: please read my [blog post](https://reego.dev/blog/isr-on-cloudflare-workers).
 - If you are just curious about the SvelteKit implementation, check the [adapter](https://github.com/reegodev/sveltekit-isr/tree/main/adapter) folder.
 
 ## License
