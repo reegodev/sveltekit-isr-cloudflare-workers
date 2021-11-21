@@ -1,5 +1,5 @@
 import preprocess from 'svelte-preprocess';
-import adapter from './adapter.js'
+import adapter from './adapter/index.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,6 +14,7 @@ const config = {
 		adapter: adapter(),
 		// Disable router to force each page to render on the edge
 		router: false,
+		hydrate: false,
 	}
 };
 

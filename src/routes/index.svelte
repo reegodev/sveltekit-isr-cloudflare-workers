@@ -1,9 +1,10 @@
 <script context="module" lang="ts">
   import type { LoadOutput } from '@sveltejs/kit'
   
-  export const load = async (): Promise<LoadOutput> => {
+  export const load = async ({ fetch }): Promise<LoadOutput> => {
     const maxage = 60 * 60 * 24 // 1 day
     const renderTimestamp = Date.now()
+
     return {
       props: {
         maxage,
@@ -45,7 +46,7 @@ export let renderTimestamp: number
     </div>
     <div class="mt-4 text-center text-gray-500">
       <p>This is a small Covid19 Tracker demo that implements Incremental Static Regeneration on SvelteKit and Cloudflare Workers.</p>
-      <p>For an in-depth explanation, see my <a href="#" class="text-primary underline">blog post</a>.</p>
+      <p>For an in-depth explanation, see my <a target="_blank" href="https://reego.dev/blog/isr-on-cloudflare-workers" class="text-primary underline">blog post</a>.</p>
     </div>
   </div>
 </div>

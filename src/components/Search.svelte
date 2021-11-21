@@ -21,50 +21,97 @@ const onCountrySelected = (selection: Country) => {
     window.location.href= `/countries/${selection.code.toLowerCase()}`
   }
 }
+
+const autocompleteScript = `
+  <${'script'}>
+    const autoCompleteJS = new autoComplete({
+      placeHolder: "Type a country name",
+      data: {
+        src:  ${JSON.stringify(countries)},
+        keys: ["name"],
+      },
+      resultItem: {
+        highlight: true
+      },
+      events: {
+        input: {
+          selection: (event) => {
+            const selection = event.detail.selection.value;
+            window.location.href= '/countries/' + selection.code.toLowerCase()
+          },
+        }
+      }
+    });
+  </${'script'}>
+  `
 </script>
 <div>
-  <div class="mt-4 flex text-lg relative" method="get" action="/country">
-    <AutoComplete
-      items={countries}
-      bind:selectedItem={selectedCountryCode}
-      onChange={onCountrySelected}
-      valueFieldName="code"
-      labelFieldName="name"
-      placeholder="Select a country"
-      className="w-full text-xl"
-      dropdownClassName="filter drop-shadow-xl"
-      inputClassName="autocomplete text-xl w-full filter drop-shadow-xl rounded-full px-8 py-4 pr-16 focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-20"
-    />
+  <div class="mt-4 text-lg relative">
+    <input id="autoComplete" class="autocomplete text-xl w-full filter drop-shadow-xl rounded-full px-8 py-4 pr-16 focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-20" />
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+  {@html autocompleteScript}
 </div>
 <style global>
-  .autocomplete {
-    height: auto !important;
+  .autoComplete_wrapper > ul {
+    position: absolute;
+    max-height: 226px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    margin: 0.5rem 0 0 0;
+    padding: 0;
+    z-index: 1;
+    list-style: none;
+    border-radius: 0.6rem;
+    background-color: #fff;
+    border: 1px solid rgba(33, 33, 33, 0.07);
+    box-shadow: 0 3px 6px rgba(149, 157, 165, 0.15);
+    outline: none;
+    transition: opacity 0.15s ease-in-out;
+    -moz-transition: opacity 0.15s ease-in-out;
+    -webkit-transition: opacity 0.15s ease-in-out;
   }
 
-  .autocomplete-input {
-    padding: 1rem 2rem !important;
-    padding-right: 4rem !important;
-  }
+.autoComplete_wrapper > ul[hidden],
+.autoComplete_wrapper > ul:empty {
+  display: block;
+  opacity: 0;
+  transform: scale(0);
+}
 
-  .autocomplete-list {
-    position: absolute !important;
-    top: 100% !important;
-    margin-top: 1rem;
-    border: 0 !important;
-    padding: 0 !important
-  }
+.autoComplete_wrapper > ul > li {
+  margin: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  font-size: 1rem;
+  color: #212121;
+  border-radius: 0.35rem;
+  background-color: rgba(255, 255, 255, 1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
 
-  .autocomplete-list-item {
-    font-size: 1.25rem !important;
-    padding: 1rem 2rem !important;
-  }
+.autoComplete_wrapper > ul > li mark {
+  background-color: transparent;
+  color: rgba(255, 122, 122, 1);
+  font-weight: bold;
+}
 
-  .autocomplete-list-item.selected {
-    background-color: theme('colors.primary') !important;
-  }
+.autoComplete_wrapper > ul > li:hover {
+  cursor: pointer;
+  background-color: rgba(255, 122, 122, 0.15);
+}
 
-  .autocomplete::after {
-    border-color: theme('colors.primary') !important;
-  }
+.autoComplete_wrapper > ul > li[aria-selected="true"] {
+  background-color: rgba(255, 122, 122, 0.15);
+}
+
+/* @media only screen and (max-width: 600px) {
+  .autoComplete_wrapper > input {
+    width: 18rem;
+  } */
 </style>

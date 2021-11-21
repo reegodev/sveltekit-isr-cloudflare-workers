@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
   import type { LoadOutput, LoadInput } from '@sveltejs/kit'
-  import axios from 'axios'
   import countryCodes from '$lib/countryCodes.json'
   
   export const load = async ({ page }: LoadInput): Promise<LoadOutput> => {
@@ -11,15 +10,14 @@
       }
     }
 
-    const { data: metadata } = await axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/metadata')
-    const { data } = await axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/countries_summary', {
-      params: {
-        country: countryName,
-        min_date: metadata.last_date,
-        max_date: metadata.last_date,
-      }
-    })
+    const metadata = await fetch('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/metadata').then(res => res.json())
 
+    const params = new URLSearchParams({
+      country: countryName,
+      min_date: metadata.last_date,
+      max_date: metadata.last_date,
+    })
+    const data = await fetch('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/countries_summary?' + params).then(res => res.json())
     const maxage = 60 * 60 * 4 // 4 hours
     const renderTimestamp = Date.now()
   

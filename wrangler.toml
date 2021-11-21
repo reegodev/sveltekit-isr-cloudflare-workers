@@ -1,0 +1,10 @@
+name = "sveltekit-isr"
+type = "webpack"
+route = ''
+account_id = 'ef45b1613c0cfae953f710bcf4fc1363'
+zone_id = ''
+usage_model = ''
+compatibility_flags = []
+workers_dev = true
+site = {bucket = "./build",entry-point = "./workers-site"}
+compatibility_date = "2021-10-31"
