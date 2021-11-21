@@ -8,7 +8,7 @@ The red bar on the top of every page shows rendering information. If you refresh
 
 ## What is ISR?
 
-ncremental Static Regeneration, or ISR for short, is a technique first introduced by Vercel to improve build times for large static websites with a lot of pages.
+Incremental Static Regeneration, or ISR for short, is a technique first introduced by Vercel to improve build times for large static websites with a lot of pages.
 
 Instead of rendering every page upfront at build time, you render pages on demand when they are requested, and then persist the response along with the rest of the site assets, effectively serving static pages after the first render.
 
