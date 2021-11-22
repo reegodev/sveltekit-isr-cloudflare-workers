@@ -46,7 +46,7 @@ export let renderTimestamp: number
     </div>
     <div class="mt-4 text-center text-gray-500">
       <p>This is a small Covid19 Tracker demo that implements Incremental Static Regeneration on SvelteKit and Cloudflare Workers.</p>
-      <p>For an in-depth explanation, see my <a target="_blank" href="https://reego.dev/blog/isr-on-cloudflare-workers" class="text-primary underline">blog post</a>.</p>
+      <p>For an in-depth explanation, see my <a target="_blank" href="https://reego.dev/blog/achieving-isr-on-cloudflare-workers" class="text-primary underline">blog post</a>.</p>
     </div>
   </div>
 </div>
